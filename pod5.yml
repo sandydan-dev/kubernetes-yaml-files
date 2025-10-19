@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: podfive  
+  labels:        # specific labels: to see perticular labels based on key:value pairs
+    day: friday
+    class: kubernetes
+  annotations:
+    description: labels pod  
+   
+  
+spec:
+  containers:
+   - name: resource
+     image: ubuntu
+     command: ["/bin/bash", "-c","while true; do echo Labels details; sleep 4; done"]  
+
