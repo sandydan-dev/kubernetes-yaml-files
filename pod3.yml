@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: podthree
+  annotations:
+    description: run multiple container in single Pod
+
+spec:
+  containers:
+     # first container
+   - name: cont1
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello container first; sleep 5; done"] 
+
+     # second container
+   - name: cont2
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo container second; sleep 5; done"]
+
+     # third container
+   - name: cont3
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello container third; sleep 5; done"]
