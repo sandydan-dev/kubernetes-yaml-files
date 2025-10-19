@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nodelabelpod
+  annotations: 
+    description: adding label to node "nodeSelector"
+
+spec:
+  containers:
+   - name: labelcont
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello node_label; sleep3; done"] 
+
+    # add label to node (worker) 
+  nodeSelector:           # specify which node to run that pod
+    mynode: dannynode     # gives any name as label
+
+   # while applying this pod, it still in pending status cause it gives nodeSelector to choose that node and run pod  
