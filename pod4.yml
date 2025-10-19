@@ -1,0 +1,15 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: podfour
+
+spec:
+  containers:
+   - name: four
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello cont four; sleep 5; done"] 
+     
+     # add environment variable inside the container
+     env:
+      - name: MYNAME         # this is the key to get env value
+        value: iam_env       # this is value which showing by given key name
