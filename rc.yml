@@ -1,0 +1,22 @@
+kind: ReplicationController   # Object type
+apiVersion: v1                # version comes under RC
+metadata:
+  name: myrc
+
+spec:
+  replicas: 3
+  selector:   # which pod belongs to this RC, and match with template. labels
+    myapp: danny
+
+  # pod looks like
+  template:
+    metadata:
+      labels:
+        myapp: danny  
+
+    # what container need
+    spec: 
+      containers:
+       - name: rc
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo Hello ReplicationController; sleep 4; done"]    
