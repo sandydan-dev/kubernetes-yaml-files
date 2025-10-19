@@ -1,0 +1,12 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: podtwo
+  annotations:
+    description: Second Pod (description of the pod)
+
+spec:
+  containers:
+   - name: c2
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello c2; sleep 5; done"]  

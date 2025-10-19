@@ -1,0 +1,10 @@
+kind: Pod                  # make a pod and run container one or more container
+apiVersion: v1             # this pod follows the rules from the API version
+metadata:
+  name: podone             # Name of the pod
+
+spec:                      # it tell kubernetes, what exactly you want for that object (detailed instruction)
+  containers:
+    -  name: c1               # container name
+       image: ubuntu
+       command: ["/bin/bash", "-c", "while true; do echo Hello c1; sleep 5; done"]
