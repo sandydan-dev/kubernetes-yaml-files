@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolume           # this is an object for persistet volume
+metadata:
+  name: myefspv                  # object PV name
+
+spec:
+  capacity:
+    storage: 1Gi                 # storage capacity to store data
+
+  accessModes:
+   - ReadWriteMany               # The volume can be mounted as read-write by many nodes simultaneously.
+
+  persistentVolumeReclaimPolicy: Retain    
+  # ells Kubernetes what to do with the physical storage (EBS, EFS, NFS, etc.) after the PVC (PersistentVolumeClaim) is deleted.
+  # Retain : Keep the data safe 
+  # Delete : Auto-delete everything
+
+
+  nfs:
+    server: fs-05d2811e38663041b.efs.ap-south-1.amazonaws.com   # EFS DNS name, 
+    path: "/"                   # path within the EFS volume, usually root path
+
+
+  

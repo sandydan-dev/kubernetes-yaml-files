@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim      # Pod’s request for storage.
+apiVersion: v1
+metadata:
+  name: myefsvolclaim            # PVC object name
+
+spec:
+  volumeName: myefspv   # this is the PersistentVolume object name, this will bind with PV + PVC
+  accessModes:          # Access mode = rules for who can read/write the volume and how many nodes can mount it.
+   - ReadWriteMany
+
+
+  resources:            # tells Kubernetes how much storage is requested.
+    requests: 
+      storage: 1Gi      # The Pod wants 1 GiB of storage.
+
+
+

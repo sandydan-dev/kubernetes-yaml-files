@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: efsdeploy
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mypv            # # Selector must match template labels
+
+  template:
+    metadata:
+      labels:
+        app: mypv         # # Template labels must match selector
+
+    spec:
+      containers:
+       - name: pv1
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo Hello PV; sleep 3; done"]
+
+         
+         volumeMounts:
+          - name: mypvol
+            mountPath: "/tmp/contval1"      #  # Path inside container where PV will be mounted
+
+      volumes:
+       - name: mypvol
+         persistentVolumeClaim:
+           claimName: myefsvolclaim    # this name comes from PersistenVolumeClaim object name, Must match PVC name     
