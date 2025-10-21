@@ -1,0 +1,30 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+
+spec:
+  containers:
+    # container one
+   - name: c01
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello Host-Path-Volume; sleep 3; done"]  
+
+     volumeMounts:
+      - name: hostvol
+        mountPath: "/tmp/contdir1"   # this is first container path 
+
+    # container two
+   - name: c02
+     image: ubuntu 
+     command: ["/bin/bash", "-c", "while true; do echo Hello cont vol 2; sleep 2; done"] 
+
+    # Node level volume 
+     volumeMounts:
+      - name: hostvol
+        mountPath: "/tmp/contdir2"   # this is second container path
+
+  volumes:
+   - name: hostvol
+     hostPath:                       # node level volumes
+       path: "/tmp/hostdir"          # this is host path for common path for all containers

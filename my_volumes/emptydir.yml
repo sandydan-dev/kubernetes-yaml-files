@@ -1,0 +1,39 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+
+spec:
+  containers:
+    # container one
+   - name: c1
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello vol1; sleep 4; done"]  
+
+     volumeMounts:
+      - name: podvol
+        mountPath: "/tmp/c1dir"
+
+    # container two
+   - name: c2
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello vol2; sleep 4; done"]
+   
+     volumeMounts:
+      - name: podvol
+        mountPath: "/tmp/c2dir"
+
+    # container three
+   - name: c3
+     image: ubuntu
+     command: ["/bin/bash", "-c", "while true; do echo Hello vol3; sleep 4; done"]
+     
+     volumeMounts:
+      - name: podvol
+        mountPath: "/tmp/c3dir"
+
+  volumes:
+   - name: podvol
+     emptyDir: {}
+   
+
