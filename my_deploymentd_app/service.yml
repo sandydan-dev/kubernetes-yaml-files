@@ -1,0 +1,19 @@
+apiVersion: v1        # which comes under service object
+kind: Service         # Service object 
+metadata:
+  name: myservice     #  service name
+
+
+spec:
+  ports:
+   - port: 80         # service port
+     targetPort: 80   # deployment object port
+
+  selector:
+    name: deployment
+  
+ # type: ClusterIP       # servie for communication between Pods inside the cluster only.  
+  
+ # type: NodePort        # It chooses a high port in the range 30000–32767   
+ 
+  type: LoadBalancer    # access web content ouside the cluster with port, cloud LB gives public IP accessible on port 80  
