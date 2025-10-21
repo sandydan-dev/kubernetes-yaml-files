@@ -1,0 +1,27 @@
+kind: Deployment          # A Deployment is a high-level Kubernetes controller that manages ReplicaSets — which in turn manage Pods.
+apiVersion: apps/v1       # uses the apps API group.
+metadata:
+  name: mydeploy          # Pod name
+  annotations:
+    description: "creating deployment object, which create ReplicaSet under the hood to create pods and manage" 
+
+spec:
+  replicas: 4             # create 4 pods
+  selector:
+    matchLabels:
+      obj: myobj          # matches with template labels to create pods
+
+  template:
+    metadata:
+      labels:
+        obj: myobj        # label name
+
+    spec:    
+      containers:
+       - name: c1
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo Hello deployment OBJ; sleep 3; done"]    
+
+         ports:
+          - containerPort: 80
+      
