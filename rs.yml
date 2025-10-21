@@ -1,0 +1,21 @@
+kind: ReplicaSet  # an object, updated version of RC
+apiVersion: apps/v1
+metadata:
+  name: myrs
+
+spec:
+  replicas: 3           # runs desire pods
+  selector:
+    matchLabels:          # match with templates
+      app: myapp   
+
+  template:
+    metadata:
+      labels:
+        app: myapp
+
+    spec:
+      containers:
+       - name: rs
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo Hello RS; sleep 5; done"]    
