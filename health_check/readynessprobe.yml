@@ -1,0 +1,18 @@
+kind: Pod                  # Define this object as pod
+apiVersion: v1             # using API version v1 for core objects like pod 
+metadata:
+  name: readynesspod       # name of the pod in namespace
+
+spec:                      # define what desire state of the pod
+  containers: 
+   - name: readyprobe      # name of the container inside the pod
+     image: httpd          # using the apache HTTP server image
+     
+     ports:
+      - containerPort: 80  # exposing port 80 inside the container
+
+     readinessProbe:           # checks if the container is ready to serve traffic
+       initialDelaySeconds: 5  # wait 5 second after container starts before the first check
+       httpGet:                # use an HTTP Get request for the probe
+         path: /               # url path to check on the container
+         port: 80              # port to check the HTTP request against  
