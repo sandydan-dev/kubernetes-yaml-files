@@ -1,0 +1,8 @@
+# convert txt file to secrets 
+cmd: kubectl create secret generic mytestsecrets --from-file=username.txt --from-file=password.txt
+# with secret name is mytestsecrets
+
+# get secrets file
+cmd: kubectl get secret
+
+cmd: kubectl describe secrets mytestsecrets
