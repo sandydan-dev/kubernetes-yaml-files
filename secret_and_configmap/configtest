@@ -1,0 +1,18 @@
+this is a general data from Devops!
+
+
+// cmd to create configmap
+
+> configtest , it just sample file to store config, general data
+
+// create configmap
+cmd: kubectl create configmap mymap --from-file=configmap
+
+// see configmap file
+cmd: kubectl get configmap
+
+// see configmap sample file data
+cmd: kubectl describe configmap mymap
+
+// valume data to pass sample file in valume
+
