@@ -1,0 +1,14 @@
+kind: ResourceQuota       # define this resource as a ResourceQuota object
+apiVersion: v1            # API version for core kubernetes resources
+metadata:
+  name: myquota           # name of the ResourceQuota object namespace
+
+spec:
+  hard:                       # 'hard' defines the maximum resources limits for the namespace
+    limits.cpu: "400m"        # max total cpu limit across all Pods 400 miliCPU (0.4 cpu core)
+    limits.memory: "400Mi"    # max total memory limit across all pods 400 Mebibytes
+    requests.cpu: "200m"      # minimum total requested cpu across all pods 200 milicpu
+    requests.memory: "200Mi"  # minumum total requested memory across all pods 200 Mebibytes
+
+
+# A ResourceQuota sets a total limit for resources — it ensures fair and controlled use of cluster resources.    

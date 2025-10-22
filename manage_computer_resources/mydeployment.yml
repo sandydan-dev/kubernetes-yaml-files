@@ -1,0 +1,27 @@
+kind: Deployment             # specifies that this object is deployment
+apiVersion: apps/v1          # define the api version used for the deployment object
+metadata:
+  name: mydeployment         # name of the deployment 
+
+spec:                        # define the desire state and configuration of the deployment
+  replicas: 4                # number of pods replicas to run at all times
+ 
+  selector:                  # define how the deployment finds pods to manage
+    matchLabels:
+      objtype: deployment    # matches pod with the label of templates
+
+  template:                  # template use to create the pods managed by this deployment
+    metadata:
+      labels:
+        objtype: deployment    # Labels assigned to each Pod created by this Deployment (must match selector)
+
+
+    spec:                      # Specification for the Pod
+      containers:
+       - name: c00             # Name of the container 
+         image: ubuntu         # The Docker image used for this container
+         command: ["/bin/bash", "-c", "while true; echo Hello resourcequote with deployment; sleep 3; done"] 
+
+         resources:           # Resource management section (requests/limits for CPU and memory)
+           requests:          # Minimum resources required to schedule the Pod
+             cpu: "200m"      # Requests 200 millicores (0.2 CPU) from the node 
