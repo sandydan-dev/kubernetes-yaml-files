@@ -1,0 +1,22 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: livenesspod
+
+spec:                          # defines the desired state of the Pod, including containers, volumes, and other settings.
+  containers:
+    - name: c01
+      image: ubuntu
+      command: ["/bin/bash", "-c", "echo 'Hello Livenessprobe' > /tmp/myfile; while true; do echo Hello Livenessprobe; sleep 3; done"]
+
+
+      livenessProbe:            # A liveness probe checks if the container is still alive. If it fails repeatedly, Kubernetes will restart the container.
+        exec:                   # The probe uses the exec type, which runs a command inside the container.
+          command:
+            - cat
+            - /tmp/myfile
+
+        initialDelaySeconds: 5  # Delay before the first liveness check starts after the container starts (5 seconds here).
+        periodSeconds: 5        # How often the liveness probe runs (every 5 seconds).
+        timeoutSeconds: 30      # Maximum time the probe waits before marking it as failed (30 seconds here).
+
