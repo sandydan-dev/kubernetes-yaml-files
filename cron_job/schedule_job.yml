@@ -1,0 +1,19 @@
+kind: CronJob             # this object, runs a job automatically on a schedule 
+apiVersion: batch/v1      # controller should manage this object version 
+metadata:
+  name: myschedulejob     # object/pod name, means name of the cronjob in the cluster
+
+spec:                     # it tells kubernetes how the CronJob should run
+  # schedule: "* * * * *"   # runs every 1 minutes  
+  schedule: "*/2 * * * *"   # runs every 2 minutes
+
+  jobTemplate:      # template for the job that will run each time
+    spec:          # what do you want to run in this pod template
+      template:
+        spec:       # container data to run in the pod
+          containers:
+           - name: job-task    # container name
+             image: ubuntu
+             command: ["/bin/bash", "-c", "echo hello cron job at $(date)"]
+
+          restartPolicy: Never   # pod wont restart again if completed
