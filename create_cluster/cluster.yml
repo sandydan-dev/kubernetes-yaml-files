@@ -7,7 +7,7 @@ metadata:
 
 
 nodeGroups:                   # node details
- - name: devops-node-group    # name of the node groups 
+ - name: node-group    # name of the node groups 
    instanceType: t2.small     # type of EC2 Instance for worker nodes
    desiredCapacity: 2          # number of worker node
 
