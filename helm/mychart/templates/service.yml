@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demoservice
+
+spec:
+  ports:
+   - port: 80   # service port
+     targetPort: 80   # container port
+
+  selector:
+    app: deployment
+
+  type: LoadBalancer     # expose service externally

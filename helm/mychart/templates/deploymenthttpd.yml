@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mydeployment  # name of the deployment object
+
+spec:
+  replicas: 4    #  run 4 pods at a time
+  selector:
+    matchLabels:
+      app: deployment   # must match with template labels
+
+  template:
+    metadata:
+      labels:
+        app: deployment    # label for pods
+
+    spec:
+      containers:
+       - name: c00
+         image: httpd
+         ports:
+          - containerPort: 80   # exposed port 80 inside container
+
+
