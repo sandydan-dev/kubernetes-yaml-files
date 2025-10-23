@@ -1,0 +1,17 @@
+kind: Job              # job = runs a pod until completion (once)
+apiVersion: batch/v1   # using the Batch api group for jobs
+metadata:
+  name: myjob1         # name of the object job
+
+spec:
+  template:            # pod template, same structure as a normal pod
+    metadata:
+      name: testjob   
+
+    spec:
+      containers:
+       - name: mycont      # container name
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo Hello Cron job; sleep 15; done"] 
+
+      restartPolicy: Never   # if a pod finishes successfully, its done, and it wont restart
