@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hpa-demo-deployment      # name of the deployment object
+
+spec:                       # specification of the deploymenet behaviour
+  selector:                 # deployment finds which pods it manage
+    matchLabels:
+      run: hpa-demo-deployment   # matches pod with labels
+
+  replicas: 3           # number of pod to run
+  template:
+    metadata:
+      labels:             # labels for pods created by deployment, must match with selector
+        run: hpa-demo-deployment
+
+    spec:
+      containers:
+       - name: hpa-demo-deployment
+         image: k8s.gcr.io/hpa-example
+         ports:
+          - containerPort: 80    # exposes port 80 in the container 
+
+         resources:
+           limits:
+             cpu: 500m    # container cannot use more than 500 millicpu.
+           requests:
+             cpu: 200m    # Kubernetes will schedule the Pod on a node with at least 200 millicpu available

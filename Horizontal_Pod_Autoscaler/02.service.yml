@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hpa-demo-deployment
+
+spec:
+  ports:
+    - port: 80   # this is service port
+
+  selector:
+    run: hpa-demo-deployment  # must match with deployment manifest selector  
