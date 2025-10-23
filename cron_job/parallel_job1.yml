@@ -1,0 +1,18 @@
+kind: Job
+apiVersion: batch/v1    # 
+metadata:
+  name: paralleljob
+
+spec:
+  parallelism: 3    # run 3 pod simulteneously
+  template:
+    metadata:
+      name: paralleltest
+
+    spec:
+      containers:
+       - name: myparallal
+         image: ubuntu
+         command: ["/bin/bash", "-c", "echo Hello parallism job; sleep 10"]  
+
+      restartPolicy: Never  # if fineshes successfully, it wont restart again   
