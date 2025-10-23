@@ -1,0 +1,18 @@
+kind: Job              # an object, and run pod until completion
+apiVersion: batch/v1     # batch api group for job
+metadata:
+  name: myparajob2
+
+spec:
+  parallelism: 5   # run 5 pods simulteneously
+  completions: 6   # tun total 6 pods until all complete.
+
+  template:
+    spec:
+      containers:
+       - name: jobworker
+         image: ubuntu
+         command: ["/bin/bash", "-c", "echo Processing task on $(hostname); sleep 5"] 
+         #  Each pod prints a message and sleeps 5 seconds
+         
+      restartPolicy: Never  # pod wont restart automatically on success/failure   
