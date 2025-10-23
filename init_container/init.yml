@@ -1,0 +1,33 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+
+spec:
+  # define initial container that run before main container
+  initContainers:  
+   - name: c1     # initial container name
+     image: ubuntu # image
+     # print this message, creates an empty file, sleep in 10s
+     command: ["/bin/bash", "-c", "echo hello initcontainer; > /tmp/c1dir/dannfile; sleep 10"] 
+    
+     volumeMounts:
+      - name: myvol   #  referance to the volume define in the 'volumes'
+        mountPath: "/tmp/c1dir"   # path inside container where volume is mounted
+
+     
+  # define main container   
+  containers:
+   - name: c2     # main container name
+     image: ubuntu  
+     command: ["/bin/bash", "-c", "sleep infinity"]   # runs inifinitely
+
+     volumeMounts:
+      - name: myvol    # mount same volume
+        mountPath: "/tmp/c2dir"   # path inside the container
+
+   # define valumes available to containers in this pod     
+  volumes:
+   - name: myvol     # main volume to store data inside the container
+     emptyDir: {}      
+          
