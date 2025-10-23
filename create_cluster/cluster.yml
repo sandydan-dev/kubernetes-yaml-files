@@ -1,0 +1,13 @@
+apiVersion: eksctl.io/v1alpha5     # eksctl config schema version
+kind: ClusterConfig                # it tells eksctl, its an object of cluster configuration
+
+metadata:
+  name: devops               # cluster name
+  region: ap-south-1         # aws cluster region
+
+
+nodeGroups:                   # node details
+ - name: devops-node-group    # name of the node groups 
+   instanceType: t2.small     # type of EC2 Instance for worker nodes
+   desiredCapacity: 2          # number of worker node
+
